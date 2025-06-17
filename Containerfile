@@ -6,16 +6,16 @@ ARG CORE_BRANCH=main
 ARG VARIANT=general
 ARG DESKTOP=nogui
 
-RUN if [ "$VARIANT" != container ]; then apt-get update; apt-get install -yq linux-generic dracut; fi
+RUN if [ "$VARIANT" != container ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq linux-generic dracut systemd systemd-container; fi
 
-RUN if [ "$DESKTOP" == gnome ]; then apt-get update; apt-get install -yq ubuntu-desktop; \
-  elif [ "$DESKTOP" == plasma ]; then apt-get update; apt-get install -yq kubuntu-desktop; fi
+RUN if [ "$DESKTOP" == gnome ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq ubuntu-desktop; \
+  elif [ "$DESKTOP" == plasma ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq kubuntu-desktop; fi
 
-RUN if [ "$VARIANT" == nvidia ]; then apt-get update; apt-get install -yq linux-modules-nvidia-570-generic nvidia-driver-570; fi
+RUN if [ "$VARIANT" == nvidia ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq linux-modules-nvidia-570-generic nvidia-driver-570; fi
 
-RUN apt-get update; apt-get install -yq grub2-common
+RUN apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq grub2-common
 
-RUN apt-get update; apt-get install -yq python3-yaml python3-click python3-fasteners skopeo umoci jq libnotify-bin wget
+RUN apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq python3-yaml python3-click python3-fasteners skopeo umoci jq libnotify-bin wget
 
 COPY overlays/common /
 

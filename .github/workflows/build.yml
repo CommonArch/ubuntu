@@ -24,8 +24,6 @@ jobs:
         variant: [general, nvidia]
         desktop: [nogui, gnome, plasma]
         include:
-          - variant: container
-            suffix: '-container'
           - variant: general
             suffix: ''
           - variant: nvidia

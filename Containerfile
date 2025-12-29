@@ -8,10 +8,10 @@ ARG DESKTOP=nogui
 
 RUN apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq linux-generic dracut systemd systemd-container locales
 
-RUN if [ "$DESKTOP" == gnome ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq ubuntu-desktop; \
-  elif [ "$DESKTOP" == plasma ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq kubuntu-desktop; fi
+RUN if [ "$DESKTOP" = gnome ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq ubuntu-desktop; \
+  elif [ "$DESKTOP" = plasma ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq kubuntu-desktop; fi
 
-RUN if [ "$VARIANT" == nvidia ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq linux-modules-nvidia-570-generic nvidia-driver-570; fi
+RUN if [ "$VARIANT" = nvidia ]; then apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq linux-modules-nvidia-570-generic nvidia-driver-570; fi
 
 RUN apt-get update; DEBIAN_FRONTEND=noninteractive apt-get install -yq grub2-common
 
